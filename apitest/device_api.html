@@ -1,1 +1,58 @@
-{\rtf1}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title> OHTV Application Template </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript">
+window.onload = function(){
+  runDevieObjTest_();
+};
+
+var runDevieObjTest_ = function(){
+	var deviceObj = document.getElementById("deviceObj");
+	
+	writeLogTOGraphicDiv("Call : deviceObj.GetDUID()");
+	try{
+		var getDuidStr = deviceObj.GetDUID() + "";
+		writeLogTOGraphicDiv("-- Result : " + getDuidStr);
+	}catch(err){
+		writeLogTOGraphicDiv("ERROR : err.message => " + err.message);
+	};
+
+	writeLogTOGraphicDiv("Call : deviceObj.GetFirmware()");	
+	try{
+		var getFirmwareStr = deviceObj.GetFirmware() + "";
+		writeLogTOGraphicDiv("-- Result : " + getFirmwareStr);
+	}catch(err){
+		writeLogTOGraphicDiv("ERROR : err.message => " + err.message);
+	};
+	
+	writeLogTOGraphicDiv("Call : deviceObj.GetModelCode()");
+	try{
+		var getModelcodeStr = deviceObj.GetModelCode() + "";
+		writeLogTOGraphicDiv("-- Result : " + getModelcodeStr);
+	}catch(err){
+		writeLogTOGraphicDiv("ERROR : err.message => " + err.message);
+	};
+};
+
+var writeLogTOGraphicDiv = function(msg){
+		document.getElementById("divGraphic").innerHTML += "<br/>"+ msg;
+};
+
+</script>
+</head>
+
+<body>
+<!-- device object -->
+<object id="deviceObj" type="application/x-ohtv-device" style="position:absolute;top:500px;left:20px;width:300px;height:95px"></object>
+
+<div style="left: 0px; top: 0px; width: 1280px; height: 720px;  position:absolute; background-color: #F7E9E9; border:1px solid #c33;  z-index:-1;"></div>
+
+<div id="divGraphic" style="left: 128px; top: 36px; width: 1024px; height: 648px; position:absolute; z-index:1;"></div>
+
+</body>
+</html>
