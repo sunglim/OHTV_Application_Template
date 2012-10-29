@@ -1,1 +1,81 @@
-{\rtf1}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title> OHTV Application Template </title>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+
+<script type="text/javascript">
+window.onload = function(){
+  runObjTest_();
+};
+
+var runObjTest_ = function(){
+	var avObj = document.getElementById("avObj");
+	avObj.data = "@@@ TODO : INSERT MEDIA URL @@@";
+	writeLogToGraphicDiv("avObj.play(1)");
+	try{
+		avObj.play(1);
+	}catch(err){
+		writeLogToGraphicDiv("ERROR : err.message => " + err.message);
+	};
+	
+	setInterval(function (){
+		writePlayposition();
+	},1000);
+	
+	
+	writeLogToGraphicDiv("avObj.stop() after 15000ms");
+	setTimeout(function (){
+		writeLogToGraphicDiv("avObj.stop()");
+		avObj.stop();
+		writeLogToGraphicDiv("avObj.play() after 15000ms");
+		setTimeout(function (){
+			writeLogToGraphicDiv("avObj.play(1) again");
+			avObj.play(1);
+		},10000);
+	},15000);
+	
+	loadAllInfo();
+};
+var timeStamp = 1;
+var writeLogToGraphicDiv = function(msg){
+	document.getElementById("divLog").innerHTML += "<br/>"+ msg;
+};
+
+var writePlayposition = function(position){
+	timeStamp++;
+	document.getElementById("divPlayposition").innerHTML = "avObj.playPosition : " + avObj.playPosition + "<br/>"+ "avObj.playState : " + avObj.playState;
+	 document.getElementById('imgBlackman').style.webkitTransform =
+    'rotateZ(' + (timeStamp * 18.0) + 'deg)';
+}
+
+var loadAllInfo = function(){
+	var infoDiv = document.getElementById("divInfo");
+	var avObj = document.getElementById("avObj");
+		
+	infoDiv.innerHTML = "avObj.data :"+ avObj.data;
+	infoDiv.innerHTML += "<br/>"+ "avObj.playTime :"+ avObj.playTime;
+	infoDiv.innerHTML += "<br/>"+ "avObj.error :"+ avObj.error;
+	infoDiv.innerHTML += "<br/>"+ "avObj.width :"+ avObj.width;
+	infoDiv.innerHTML += "<br/>"+ "avObj.height :"+ avObj.height;
+	infoDiv.innerHTML += "<br/>"+ "avObj.fullScreen :"+ avObj.fullScreen;
+};
+
+</script>
+</head>
+
+<body>
+<!-- device object -->
+<!--<object id="avObj" type="application/x-ohtv-avobject" style="position:absolute;top:0px;left:0px;width:960px;height:540px" data="http://10.177.41.56/users/sungguk.lim/ohtv_test/video.ts"></object>-->
+<object id="avObj" type="application/x-ohtv-avobject" style="position:absolute;top:0px;left:0px;width:960px;height:540px"></object>
+
+<div style="left: 0px; top: 0px; width: 1280px; height: 720px;  position:absolute; background-color: #F7E9E9; border:1px solid #c33;  z-index:-1;"></div>
+
+<div id="divLog" style="left: 1028px; top: 36px; width: 200px; height: 500px; position:absolute;background-color: rgb(163, 230, 173);"></div>
+<img id='imgBlackman' src="blackman.png" style="left: 958px; top: 536px; width: 70px; height: 70px; position:absolute;"/>
+<div id="divPlayposition" style="left: 1028px; top: 536px; width: 200px; height: 140px; position:absolute;background-color: rgb(228, 214, 55);"></div>
+<div id="divInfo" style="left: 10px; top: 550px; width: 800px; height: 140px; position:absolute;background-color: #7B93D1;"></div>
+</body>
+</html>
